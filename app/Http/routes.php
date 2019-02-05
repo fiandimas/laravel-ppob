@@ -10,11 +10,3 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function(){
-  return view('template');
-});
-
-Route::get('/login', function(){
-  return view('login');
-});
