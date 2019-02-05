@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function(){
-  return view('admin.dashboard');
+// Admin Route
+Route::get('/admin','AdminController@index');
+Route::get('/admin/login', function(){
+ if(Session::get('login')){
+   return redirect('/admin');
+ }else{
+   return view('admin.login');
+ }
 });
+Route::get('/admin/logout', function(){
+  Session::flush();
+  return redirect('/admin/login');
+});
+
+Route::post('/admin/login','AuthController@adminLogin');
