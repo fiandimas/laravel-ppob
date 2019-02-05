@@ -24,5 +24,5 @@ Route::get('/admin/logout', function(){
   Session::flush();
   return redirect('/admin/login');
 });
-
+Route::get('/admin/level','LevelController@index');
 Route::post('/admin/login','AuthController@adminLogin');
