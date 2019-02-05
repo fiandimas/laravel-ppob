@@ -94,43 +94,43 @@
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/level') }}">
                           <i class="material-icons">account_circle</i>
                           <span>Level</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/admin') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Data Admin</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/cost') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Data Tarif</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/customer') }}">
                           <i class="material-icons">account_balance_wallet</i>
                           <span>Data Pelanggan</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/usage') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Penggunaan Pelanggan</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/payment') }}">
                           <i class="material-icons">account_balance_wallet</i>
                           <span>Konfirmasi Pembayaran</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="index.html">
+                      <a href="{{ url('admin/history') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Histori</span>
                       </a>
