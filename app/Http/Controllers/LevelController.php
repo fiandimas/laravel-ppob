@@ -24,6 +24,32 @@ class LevelController extends Controller {
         return view('errors/403');
       }
     }
-	}
+  }
+  
+  public function create(Request $req){
+    $this->validate($req,[
+      'name' => 'required|unique:level'
+    ]);
+
+    $level = new Level();
+    $level->name = $req->name;
+    $level->save();
+    
+    return redirect()->back()->with('success','Success add level');
+  }
+
+  public function destroy($id){
+    $level = Level::find($id);
+    if($level == null){
+      return redirect('admin/level');
+    }else{
+      $level->delete();
+      return redirect('admin/level')->with('success','Succss delete level');
+    }    
+  }
+
+  public function show($id){
+    return Level::find($id);
+  }
 
 }

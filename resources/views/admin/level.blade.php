@@ -26,38 +26,55 @@
                   <th>{{ $data->id }}</th>
                   <th>{{ $data->name }}</th>
                   <th>
-                    <a href="" class="btn btn-warning">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get(1)">Edit</a>
+                    <a href="{{ url('admin/level/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
                   </th>
                 </tr>
               @endforeach
             </table>
           </div>
           <div class="col-md-5">
-              <form id="sign_in" method="POST" action="{{ url('admin/level') }}">
-                @if (session('fail'))
-                  <div class="alert alert-danger" style="margin-top:-20px;">
-                    {{ session('fail') }}
-                  </div>
-                @endif
-                <div class="input-group">
-                    <input type="hidden" value="{{ csrf_token() }}" name="_token">
-                    
-                    <div class="form-line">
-                      <input type="text" class="form-control" name="name" placeholder="Name" value="{{ old('username') }}" autofocus>
-                    </div>
-                    @if ($errors->has('name'))
-                      <p>{{ $errors->first('name') }}</p>
-                    @endif  
+            <form id="sign_in" method="POST" action="{{ url('admin/level/add') }}">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              @if (session('fail'))
+                <div class="alert alert-danger" style="margin-top:-20px;">
+                  {{ session('fail') }}
                 </div>
-                <div class="row">
-                    <div class="col-xs-4">
-                        <button class="btn btn-block bg-pink waves-effect" type="submit">Tambah</button>
-                    </div>
+              @endif
+              @if (session('success'))
+                <div class="alert alert-success" style="margin-top:-20px;">
+                  {{ session('success') }}
                 </div>
+              @endif
+              <input type="text" class="form-control" name="name" placeholder="Nama Level">
+              <p>{{ $errors->first('name') }}</p>
+             
+              <input type="submit" name="simpan" value="Tambah" class="btn btn-success">
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Tambah level</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" enctype="multipart/form-data">
+            <?php $arr_level=array("direktur","Manager","Receptionist");?>
+          Nama level 
+          <input type="text" class="form-control" name="nama_level">
+          <br>
+          <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
