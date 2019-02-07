@@ -40,3 +40,10 @@ Route::post('admin/level/add','LevelController@create');
 Route::post('admin/admin/add','AdminController@create');
 Route::post('admin/cost/add','CostController@create');
 Route::post('admin/customer/add','CustomerController@create');
+
+// Customer route
+Route::get('/','CustomerController@index');
+Route::get('/login',function(){
+  return view('customer.login');
+});
+Route::post('login','AuthController@customerLogin');

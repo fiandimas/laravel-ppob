@@ -13,7 +13,19 @@ class CustomerController extends Controller {
 
 	public function index(){
     if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
+      return redirect('login')->with('fail','You must login first!');
+    }else{
+      if(Session::get('level') == 'customer'){
+        return view('customer.dashboard');
+      }else{
+        return view('errors/403');
+      }
+    }
+  }
+  
+  public function customer(){
+    if(!Session::get('login')){
+      return redirect('login')->with('fail','You must login first!');
     }else{
       if(Session::get('level') == 1){
         $customer = DB::table('customer')

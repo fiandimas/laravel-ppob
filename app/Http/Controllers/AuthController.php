@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin;
+use App\Customer;
 use Hash;
 use Session;
 
@@ -28,6 +29,30 @@ class AuthController extends Controller {
         return redirect('/admin');
       }else{
         return redirect()->back()->with('fail','Wrong password!')->withInput();
+      }
+    }else{
+      return redirect()->back()->with('fail','Username not registered!')->withInput();
+    }
+  }
+
+  public function customerLogin(Request $req){
+    $this->validate($req,[
+      'username' => 'required|min:4|max:8',
+      'password' => 'required|min:4|max:8'
+    ]);
+
+    $customer = Customer::where('username', $req->username)->first();
+    if(count($customer) > 0){
+      if(Hash::check($req->password,$customer->password)){
+        $session = array(
+          'login' => true,
+          'level' => 'customer',
+          'name' => $customer->name
+        );
+        Session::put($session);
+        return redirect('/');
+      }else{
+        return redirect()->back()->with('fail','Wrong password')->withInput();
       }
     }else{
       return redirect()->back()->with('fail','Username not registered!')->withInput();
