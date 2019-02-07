@@ -12,6 +12,8 @@
 */
 
 // Admin Route
+
+
 Route::get('admin','AdminController@index');
 Route::get('admin/login', function(){
  if(Session::get('login')){
@@ -45,5 +47,9 @@ Route::post('admin/customer/add','CustomerController@create');
 Route::get('/','CustomerController@index');
 Route::get('/login',function(){
   return view('customer.login');
+});
+Route::get('/logout', function(){
+  Session::flush();
+  return redirect('login');
 });
 Route::post('login','AuthController@customerLogin');

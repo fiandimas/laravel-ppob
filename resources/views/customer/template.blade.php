@@ -77,7 +77,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ url('customer/logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="{{ url('logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,13 +88,13 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                      <a href="{{ url('customer') }}">
+                      <a href="{{ url('/') }}">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                       </a>
                     </li>
                     <li class="">
-                      <a href="{{ url('customer/bill') }}">
+                      <a href="{{ url('bill') }}">
                           <i class="material-icons">account_circle</i>
                           <span>Bill</span>
                       </a>
