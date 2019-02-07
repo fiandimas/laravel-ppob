@@ -28,7 +28,7 @@ class LevelController extends Controller {
   
   public function create(Request $req){
     $this->validate($req,[
-      'name' => 'required|unique:level'
+      'name' => 'required|unique:level,username'
     ]);
 
     $level = new Level();

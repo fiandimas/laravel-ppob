@@ -47,7 +47,7 @@ class AdminController extends Controller {
   public function create(Request $req){
     $this->validate($req,[
       'name' => 'required|min:4',
-      'username' => 'required|min:4|max:8|unique:admin',
+      'username' => 'required|min:4|max:8|unique:admin,username',
       'password' => 'required|min:4|max:8'
     ]);
 
