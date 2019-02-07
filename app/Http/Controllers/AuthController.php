@@ -45,6 +45,7 @@ class AuthController extends Controller {
     if(count($customer) > 0){
       if(Hash::check($req->password,$customer->password)){
         $session = array(
+          'id' => $customer->id,
           'login' => true,
           'level' => 'customer',
           'name' => $customer->name

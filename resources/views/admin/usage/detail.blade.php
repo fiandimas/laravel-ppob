@@ -13,33 +13,28 @@
       <div class="body">
         <div class="row">
           <div class="col-md-12">
-            <center>
-                @if (session('success'))
-                  <div class="alert alert-success">
-                    {{ session('success') }}
-                  </div>
-                @endif
-            </center>
             <table class="table table-striped table-bordered">
               <tr>
-                <th>Name</th>
-                <th>No. KWH</th>
-                <th>Power</th>
+                <th>Bulan</th>
+                <th>Tahun</th>
+                <th>Meter Awal</th>
+                <th>Meter Akhir</th>
+                <th>Total</th>
                 <th>Aksi</th>
               </tr>
-              @foreach ($customer as $data)
-                <tr>
-                  <td>{{ $data->name }}</td>
-                  <td>{{ $data->kwh_number }}</td>
-                  <td>{{ $data->power }}</td>
-                  <td>
-                    <a href="{{ url('admin/usage/add').'/'.$data->id }}" class="btn btn-success" data-toggle="modal" onclick="get(1)">Tambah Penggunaan</a>
-                    <a href="{{ url('admin/usage/detail').'/'.$data->id }}" class="btn btn-primary">Detail Penggunaan</a>
-                    <a href="{{ url('admin/usage/bill').'/'.$data->id }}" class="btn btn-info" data-toggle="modal" onclick="get(1)">Detail Tagihan</a>
-                  </td>
-                </tr>
-                  @endforeach
-                </table>
+              @foreach ($usage as $data)
+              <tr>
+                <td>{{ $month[$data->month] }}</td>
+                <td>{{ $data->year }}</td>
+                <td>{{ $data->start_meter }}</td>
+                <td>{{ $data->finish_meter }}</td>
+                <td>{{ $data->start_meter + $data->finish_meter }}</td>
+                <td>
+                  <a href="{{ url('admin/usage/delete/').'/'.$data->id }}" class="btn btn-danger">Hapus</a>
+                </td>
+              </tr>
+              @endforeach
+            </table>
           </div>
         </div>
       </div>
@@ -55,8 +50,7 @@
       </div>
       <div class="modal-body">
         <form action="" method="post" enctype="multipart/form-data">
-            <?php $arr_level=array("direktur","Manager","Receptionist");?>
-          Nama level  
+          Nama level 
           <input type="text" class="form-control" name="nama_level">
           <br>
           <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
