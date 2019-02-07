@@ -2,83 +2,52 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Cost;
+use DB;
+use Session;
 use Illuminate\Http\Request;
 
 class CostController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+	public function index(){
+    if(!Session::get('login')){
+      return redirect('admin/login')->with('fail','You must login first!');
+    }else{
+      if(Session::get('level') == 1){
+        $data = array(
+          'no' => 1,
+          'cost' => Cost::all()
+        );
+        return view('admin.cost',$data);
+      }else{
+        return view('errors/403');
+      }
+    }
+  }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+  public function create(Request $req){
+    $this->validate($req,[
+      'power' => 'required|numeric',
+      'cost' => 'required|numeric'
+    ]);
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    $cost = new Cost();
+    $cost->power = $req->power;
+    $cost->cost = $req->cost;
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    $cost->save();
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    return redirect()->back()->with('success','Success add cost');
+  }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+  public function destroy($id){
+    $cost = Cost::find($id);
+    if($cost == null){
+      return redirect('admin/cost');
+    }else{
+      $cost->delete();
+      return redirect('admin/cost')->with('success','Success delete cost');
+    }
+  }
 
 }

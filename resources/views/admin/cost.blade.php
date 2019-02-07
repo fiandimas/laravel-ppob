@@ -17,28 +17,26 @@
               <tr>
                 <th>No</th>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Admin</th>
+                <th>Power</th>
+                <th>Cost</th>
                 <th>Aksi</th>
               </tr>
-              @foreach ($admin as $data)
+              @foreach ($cost as $data)
                 <tr>
                   <th>{{ $no++ }}</th>
                   <th>{{ $data->id }}</th>
-                  <th>{{ $data->name }}</th>
-                  <th>{{ $data->username }}</th>
-                  <th>{{ $data->lname }}</th>
+                  <th>{{ $data->power }}</th>
+                  <th>{{ $data->cost }}</th>
                   <th>
                     <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get(1)">Edit</a>
-                    <a href="{{ url('admin/admin/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
+                    <a href="{{ url('admin/cost/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
                   </th>
                 </tr>
               @endforeach
             </table>
           </div>
           <div class="col-md-5">
-            <form id="sign_in" method="POST" action="{{ url('admin/admin/add') }}">
+            <form id="sign_in" method="POST" action="{{ url('admin/cost/add') }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               @if (session('fail'))
                 <div class="alert alert-danger" style="margin-top:-20px;">
@@ -50,17 +48,10 @@
                   {{ session('success') }}
                 </div>
               @endif
-              <input type="text" class="form-control" name="name" placeholder="Nama Admin">
-              <p>{{ $errors->first('name') }}</p>
-              <input type="text" class="form-control" name="username" placeholder="Username">
-              <p>{{ $errors->first('username') }}</p>
-              <input type="password" class="form-control" name="password" placeholder="Password">  
-              <p>{{ $errors->first('password') }}</p>            
-              <select name="level" class="form-control">
-                @foreach ($level as $data)
-                  <option value="{{ $data->id }}">{{ $data->name }}</option>
-                @endforeach
-              </select>
+              <input type="text" class="form-control" name="power" placeholder="Daya">
+              <p>{{ $errors->first('power') }}</p>
+              <input type="text" class="form-control" name="cost" placeholder="Tarif/KWH">
+              <p>{{ $errors->first('cost') }}</p>          
               <p></p>
               <input type="submit" name="simpan" value="Tambah" class="btn btn-success">
             </form>
@@ -79,6 +70,7 @@
       </div>
       <div class="modal-body">
         <form action="" method="post" enctype="multipart/form-data">
+            <?php $arr_level=array("direktur","Manager","Receptionist");?>
           Nama level 
           <input type="text" class="form-control" name="nama_level">
           <br>
