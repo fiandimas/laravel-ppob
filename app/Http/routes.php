@@ -34,6 +34,7 @@ Route::get('admin/cost/delete/{id}','CostController@destroy');
 Route::get('admin/customer/delete/{id}','CustomerController@destroy');
 Route::get('admin/customer','CustomerController@index');
 Route::get('admin/cost','CostController@index');
+Route::get('admin/usage','UsageController@index');
 Route::post('admin/login','AuthController@adminLogin');
 Route::post('admin/level/add','LevelController@create');
 Route::post('admin/admin/add','AdminController@create');
