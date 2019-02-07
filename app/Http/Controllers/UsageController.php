@@ -55,7 +55,12 @@ class UsageController extends Controller {
       'customer' => $customer,
       'month' => Month::all()
     );
-    return view('admin.usage.add', $data);
+
+    if($customer == null){
+      return redirect('admin/usage');
+    }else{
+      return view('admin.usage.add', $data);
+    }
   }
 
   public function detail($id){
@@ -80,6 +85,10 @@ class UsageController extends Controller {
       'month' => $month
     );
 
-    return view('admin.usage.detail', $data);
+    if($usage->all() == null){
+      return redirect('admin/usage');
+    }else{
+      return view('admin.usage.detail', $data);
+    }
   }
 }
