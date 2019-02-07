@@ -36,7 +36,7 @@
                 <form id="sign_in" method="POST" action="{{ url('admin/login') }}">
                     <div class="msg">Sign in to start your session</div>
                     @if (session('fail'))
-                      <div class="alert alert-danger" style="margin-top:-20px;">
+                      <div class="alert alert-danger">
                         {{ session('fail') }}
                       </div>
                     @endif
@@ -48,9 +48,7 @@
                         <div class="form-line">
                           <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" autofocus>
                         </div>
-                        @if ($errors->has('username'))
                           <p>{{ $errors->first('username') }}</p>
-                        @endif  
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -59,9 +57,7 @@
                         <div class="form-line">
                             <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
-                        @if ($errors->has('password'))
                           <p>{{ $errors->first('password') }}</p>
-                        @endif 
                     </div>
                     <div class="row">
                         <div class="col-xs-4">

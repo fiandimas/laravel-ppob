@@ -12,20 +12,24 @@
 */
 
 // Admin Route
-Route::get('/admin','AdminController@index');
-Route::get('/admin/login', function(){
+Route::get('admin','AdminController@index');
+Route::get('admin/login', function(){
  if(Session::get('login')){
    return redirect('/admin');
  }else{
    return view('admin.login');
  }
 });
-Route::get('/admin/logout', function(){
+Route::get('admin/logout', function(){
   Session::flush();
-  return redirect('/admin/login');
+  return redirect('admin/login');
 });
+
+Route::get('admin/admin','AdminController@admin');
 Route::get('admin/level/delete/{id}','LevelController@destroy');
 Route::get('admin/level/show/{id}','LevelController@show');
-Route::get('/admin/level','LevelController@index');
-Route::post('/admin/login','AuthController@adminLogin');
-Route::post('/admin/level/add','LevelController@create');
+Route::get('admin/level','LevelController@index');
+Route::get('admin/admin/delete/{id}','AdminController@destroy');
+Route::post('admin/login','AuthController@adminLogin');
+Route::post('admin/level/add','LevelController@create');
+Route::post('admin/admin/add','AdminController@create');
