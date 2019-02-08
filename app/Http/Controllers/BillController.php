@@ -133,9 +133,6 @@ class BillController extends Controller {
 
     // Find payment
     $payment = Payment::firstOrNew(['id_bill' => $req->id]);
-    if($payment->bukti != null){
-      File::delete(public_path('/images/customer/bill/'.$payment->bukti));
-    }
     $payment->id_bill = $bill->id;
     $payment->date = Date('Y-m-d');
     $payment->id_month = $bill->month;
@@ -143,8 +140,10 @@ class BillController extends Controller {
     $payment->admin_cost = 10000;
     $payment->total = $req->total;
     $payment->bukti = $photoName;
-    // Save
+    $payment->status = 'p';
+      // Save
     $payment->save();
+    
     $bill->save();
     $save = $photo->move($path,$photoName);
     // Redirect

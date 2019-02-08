@@ -1,5 +1,5 @@
 <?php
-
+use App\Payment;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -42,6 +42,7 @@ Route::get('admin/usage/bill/{id}','BillController@detail');
 Route::get('admin/payment','PaymentController@index');
 Route::get('admin/payment/accept/{id_payment}/{id_bill}','PaymentController@accept');
 Route::get('admin/payment/reject/{id_payment}/{id_bill}','PaymentController@reject');
+Route::get('admin/history','HistoryController@index');
 Route::post('admin/usage/add/{id}','UsageController@create');
 Route::post('admin/login','AuthController@adminLogin');
 Route::post('admin/admin/add','AdminController@create');

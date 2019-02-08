@@ -16,7 +16,7 @@ class PaymentController extends Controller {
     }else{
       if(Session::get('level') == 1){
         $payment = DB::table('payment')
-                        ->where('payment.status','p')
+                        ->whereIn('payment.status',['p','n'])
                         ->join('bill','bill.id','=','payment.id_bill')
                         ->join('usage','usage.id','=','bill.id_usage')
                         ->join('customer','customer.id','=','usage.id_customer')
@@ -37,7 +37,8 @@ class PaymentController extends Controller {
             12 => 'D'
         );
         $status = array(
-          'p' => 'Pending'
+          'p' => 'Pending',
+          'n' => 'Belum Bayar'
         );               
         $data = array(
           'capt' => 'Pembayaran',
