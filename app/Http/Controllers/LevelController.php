@@ -27,18 +27,6 @@ class LevelController extends Controller {
     }
   }
   
-  public function create(Request $req){
-    $this->validate($req,[
-      'name' => 'required|unique:level,username'
-    ]);
-
-    $level = new Level();
-    $level->name = $req->name;
-    $level->save();
-    
-    return redirect()->back()->with('success','Success add level');
-  }
-
   public function destroy($id){
     $level = Level::find($id);
     if($level == null){

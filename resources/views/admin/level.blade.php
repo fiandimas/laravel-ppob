@@ -12,7 +12,7 @@
       </div>
       <div class="body">
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-12">
             <table class="table table-striped table-bordered">
               <tr>
                 <th>No</th>
@@ -33,26 +33,6 @@
               @endforeach
             </table>
           </div>
-          <div class="col-md-5">
-            <form id="sign_in" method="POST" action="{{ url('admin/level/add') }}">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              @if (session('fail'))
-                <div class="alert alert-danger" style="margin-top:-20px;">
-                  {{ session('fail') }}
-                </div>
-              @endif
-              @if (session('success'))
-                <div class="alert alert-success" style="margin-top:-20px;">
-                  {{ session('success') }}
-                </div>
-              @endif
-              <input type="text" class="form-control" name="name" placeholder="Nama Level">
-              <p>{{ $errors->first('name') }}</p>
-             
-              <input type="submit" name="simpan" value="Tambah" class="btn btn-success">
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </div>

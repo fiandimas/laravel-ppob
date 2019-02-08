@@ -34,10 +34,14 @@
                 <td>{{ $data->admin_cost }}</th>
                 <td>{{ $data->total }}</th>
                 <td>{{ $status[$data->status] }}</th>
-                <td><img src="{{ asset('img/verif/') }}"></th>
                 <td>
-                  <a href="" class="btn btn-success">Lunas</a>
-                  <a href="" class="btn btn-danger">Ditolak</a>
+                  @if ($data->bukti)
+                    <img src="{{ asset('images/customer/bill').'/'.$data->bukti }}" height="50px">
+                  @endif
+                </th>
+                <td>
+                  <a href="{{ url('admin/payment/accept').'/'.$data->id }}" class="btn btn-success" onclick="return confirm('Are you sure to accept this item?')">Lunas</a>
+                  <a href="{{ url('admin/payment/reject').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to reject this item?')">Tolak</a>
                 </th>
               </tr>
               @endforeach

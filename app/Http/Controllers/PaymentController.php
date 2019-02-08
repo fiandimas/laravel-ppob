@@ -18,7 +18,7 @@ class PaymentController extends Controller {
                         ->join('bill','bill.id','=','payment.id_bill')
                         ->join('usage','usage.id','=','bill.id_usage')
                         ->join('customer','customer.id','=','usage.id_customer')
-                        ->select('customer.name','customer.kwh_number','payment.date','payment.id_month','payment.year','payment.admin_cost','payment.total','payment.status','payment.bukti')
+                        ->select('payment.id','customer.name','customer.kwh_number','payment.date','payment.id_month','payment.year','payment.admin_cost','payment.total','payment.status','payment.bukti')
                         ->get();
         $month = array(
             1 => 'Januari',
