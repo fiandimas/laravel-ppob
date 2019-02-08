@@ -63,3 +63,15 @@ Route::get('/logout', function(){
 Route::get('bill','BillController@customer');
 Route::post('login','AuthController@customerLogin');
 Route::post('bill/confirm','BillController@confirm');
+
+// Teller route
+Route::get('teller','TellerController@index');
+Route::get('admin/login',function(){
+  return view('admin.login');
+});
+Route::get('teller/logout', function(){
+  Session::flush();
+  return redirect('admin/login');
+});
+Route::get('teller/history','HistoryController@index');
+Route::post('teller/login','AuthController@adminLogin');

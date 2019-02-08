@@ -73,11 +73,11 @@
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Session::get('name') }}</div>
-                    <div class="email">customer@customer.com</div>
+                    <div class="email">admin@admin.com</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ url('logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="{{ url('teller/logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,15 +88,15 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li id="active-dashboard">
-                      <a href="{{ url('/') }}">
+                      <a href="{{ url('/teller') }}">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                       </a>
                     </li>
-                    <li id="active-bill">
-                      <a href="{{ url('bill') }}">
-                          <i class="material-icons">account_balance_wallet</i>
-                          <span>Tagihan</span>
+                    <li id="active-history">
+                      <a href="{{ url('teller/history') }}">
+                          <i class="material-icons">history</i>
+                          <span>Histori</span>
                       </a>
                     </li>
                 </ul>
@@ -148,7 +148,7 @@
 
     <!-- Demo Js -->
     <script src="/js/demo.js"></script>
-    <script src="/js/select-customer.js"></script>
+    <script src="/js/select-teller.js"></script>
 </body>
 
 </html>

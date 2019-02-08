@@ -18,7 +18,15 @@ class CustomerController extends Controller {
   }
 
 	public function index(){
-    return view('customer.dashboard',['capt' => 'Dashboard']);
+    if(!Session::get('login')){
+      return redirect('login')->with('fail','You must login first');
+    }else{
+      if(Session::get('level') == 'customer'){
+        return view('customer.dashboard',['capt' => 'Dashboard']);
+      }else{
+        return view('errors.403');
+      }
+    }
   }
   
   public function customer(){

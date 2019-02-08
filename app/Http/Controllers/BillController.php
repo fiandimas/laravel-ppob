@@ -53,7 +53,11 @@ class BillController extends Controller {
   }
 
   public function customer(){
-    $bill =  DB::table('bill')
+    if(!Session::get('login')){
+
+    }else{
+      if(Session::get('level') == 'customer'){
+        $bill =  DB::table('bill')
               ->where('usage.id_customer',Session::get('id'))
               ->join('usage','usage.id','=','bill.id_usage')
               ->join('customer','customer.id','=','usage.id_customer')
@@ -62,35 +66,39 @@ class BillController extends Controller {
               ->select('bill.id','bill.month','bill.year','cost.cost','bill.total_meter','payment.status','payment.bukti')
               ->orderBy('bill.id','DESC')
               ->get();
-    $status = array(
-      '' => 'Belum Upload',
-      'n' => 'Belum Bayar',
-      'y' => 'Lunas',
-      'p' => 'Pending',
-      'r' => 'Ditolak'
-    );
-    $month = array(
-      1 => 'Januari',
-      2 => 'Februari',
-      3 => 'Maret',
-      4 => 'April',
-      5 => 'Mei',
-      6 => 'Juni',
-      7 => 'Juli',
-      8 => 'Agustus',
-      9 => 'September',
-      10 => 'Oktober',
-      11 => 'November',
-      12 => 'Desember'
-    );
-    $data = array(
-      'bill' => $bill,
-      'status' => $status,
-      'capt' => 'Tagihan',
-      'month' => $month
-    );
-    
-    return view('customer.bill', $data);
+        $status = array(
+          '' => 'Belum Upload',
+          'n' => 'Belum Bayar',
+          'y' => 'Lunas',
+          'p' => 'Pending',
+          'r' => 'Ditolak'
+        );
+        $month = array(
+          1 => 'Januari',
+          2 => 'Februari',
+          3 => 'Maret',
+          4 => 'April',
+          5 => 'Mei',
+          6 => 'Juni',
+          7 => 'Juli',
+          8 => 'Agustus',
+          9 => 'September',
+          10 => 'Oktober',
+          11 => 'November',
+          12 => 'Desember'
+        );
+        $data = array(
+          'bill' => $bill,
+          'status' => $status,
+          'capt' => 'Tagihan',
+          'month' => $month
+        );
+        
+        return view('customer.bill', $data);
+      }else{
+        return view('errors.403');
+      }
+    }
   }
 
   public function confirm(Request $req){

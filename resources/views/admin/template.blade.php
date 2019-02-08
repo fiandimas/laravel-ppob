@@ -49,14 +49,14 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="/javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-                <a href="/javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="/index.html">ADMINBSB - MATERIAL DESIGN</a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="/admin">ADMINBSB - MATERIAL DESIGN</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a href="/javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                     <!-- #END# Call Search -->                    
                 </ul>
             </div>
@@ -87,51 +87,51 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active">
+                    <li id="active-dashboard">
                       <a href="{{ url('admin') }}">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-level">
                       <a href="{{ url('admin/level') }}">
                           <i class="material-icons">account_circle</i>
                           <span>Level</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-admin">
                       <a href="{{ url('admin/admin') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Data Admin</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-cost">
                       <a href="{{ url('admin/cost') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Data Tarif</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-customer">
                       <a href="{{ url('admin/customer') }}">
                           <i class="material-icons">account_balance_wallet</i>
                           <span>Data Pelanggan</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-usage">
                       <a href="{{ url('admin/usage') }}">
                         <i class="material-icons">account_balance_wallet</i>
                         <span>Penggunaan Pelanggan</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-payment">
                       <a href="{{ url('admin/payment') }}">
                           <i class="material-icons">account_balance_wallet</i>
                           <span>Konfirmasi Pembayaran</span>
                       </a>
                     </li>
-                    <li class="">
+                    <li id="active-history">
                       <a href="{{ url('admin/history') }}">
-                        <i class="material-icons">account_balance_wallet</i>
+                        <i class="material-icons">history</i>
                         <span>Histori</span>
                       </a>
                     </li>
@@ -141,7 +141,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 - 2017 <a href="/javascript:void(0);">AdminBSB - Material Design</a>.
+                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
                 </div>
                 <div class="version">
                     <b>Version: </b> 1.0.5
@@ -184,6 +184,7 @@
 
     <!-- Demo Js -->
     <script src="/js/demo.js"></script>
+    <script src="/js/select.js"></script>
 </body>
 
 </html>

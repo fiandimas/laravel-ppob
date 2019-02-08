@@ -27,7 +27,14 @@ class AuthController extends Controller {
         );
         Session::put($session);
 
-        return redirect('/admin');
+        switch($user->id_level){
+          case 1:
+            return redirect('admin');
+            break;
+          case 2:
+            return redirect('teller');
+            break;
+        }
       }else{
         return redirect()->back()->with('fail','Wrong password!')->withInput();
       }

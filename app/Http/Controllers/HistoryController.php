@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Session;
 use DB;
 
 class HistoryController extends Controller {
@@ -45,6 +46,13 @@ class HistoryController extends Controller {
       'capt' => 'Histori'
     );
 
-    return view('admin.history', $data);
+    switch(Session::get('level')){
+      case 1:
+        return view('admin.history', $data);
+        break;
+      case 2:
+        return view('teller.history', $data);
+        break;  
+    }
   }
 }
