@@ -39,4 +39,37 @@ class BillController extends Controller {
     }
   }
 
+  public function detail($id){
+    $bill = DB::table('bill')
+                  ->join('usage','usage.id','=','bill.id_usage')
+                  ->where('id_customer',$id)
+                  ->select('bill.month','bill.year','bill.total_meter','bill.status')
+                  ->get();
+    $status = array(
+      'y' => 'Lunas',
+      'n' => 'Belum Lunas'
+    );
+    $month = array(
+      1 => 'Januari',
+      2 => 'Februari',
+      3 => 'Maret',
+      4 => 'April',
+      5 => 'Mei',
+      6 => 'Juni',
+      7 => 'Juli',
+      8 => 'Agustus',
+      9 => 'September',
+      10 => 'Oktober',
+      11 => 'November',
+      12 => 'Desember'
+    );
+    $data = array(
+      'bill' => $bill,
+      'status' => $status,
+      'month' => $month
+    );
+    
+    return view('admin.usage.bill', $data);
+  }
+
 }

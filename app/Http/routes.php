@@ -39,6 +39,7 @@ Route::get('admin/cost','CostController@index');
 Route::get('admin/usage','UsageController@index');
 Route::get('admin/usage/add/{id}','UsageController@loadCreate');
 Route::get('admin/usage/detail/{id}','UsageController@detail');
+Route::get('admin/usage/bill/{id}','BillController@detail');
 Route::post('admin/usage/add/{id}','UsageController@create');
 Route::post('admin/login','AuthController@adminLogin');
 Route::post('admin/level/add','LevelController@create');
