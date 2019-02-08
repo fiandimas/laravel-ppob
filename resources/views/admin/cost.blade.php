@@ -23,14 +23,14 @@
               </tr>
               @foreach ($cost as $data)
                 <tr>
-                  <th>{{ $no++ }}</th>
-                  <th>{{ $data->id }}</th>
-                  <th>{{ $data->power }}</th>
-                  <th>{{ $data->cost }}</th>
-                  <th>
-                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get(1)">Edit</a>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->power }}</td>
+                  <td>{{ $data->cost }}</td>
+                  <td>
+                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }},{{ $data->power}}, {{ $data->cost }})">Edit</a>
                     <a href="{{ url('admin/cost/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
-                  </th>
+                  </td>
                 </tr>
               @endforeach
             </table>
@@ -69,10 +69,14 @@
         <h4 class="modal-title">Tambah level</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post" enctype="multipart/form-data">
-            <?php $arr_level=array("direktur","Manager","Receptionist");?>
-          Nama level 
-          <input type="text" class="form-control" name="nama_level">
+        <form action="{{ url('admin/cost/update') }}" method="post">
+          <input type="hidden" name="id" id="id">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          Daya
+          <input type="number" class="form-control" name="power" id="power" required>
+          <br>
+          Tarif
+          <input type="number" class="form-control" name="cost" id="cost" required>
           <br>
           <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
         </form>
@@ -83,4 +87,11 @@
     </div>
   </div>
 </div>
+<script>
+  function get(id,power,cost){
+    $("#id").val(id);
+    $("#power").val(power);
+    $("#cost").val(cost);
+  }  
+</script>
 @endsection

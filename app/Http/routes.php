@@ -28,7 +28,7 @@ Route::get('admin/logout', function(){
 });
 
 Route::get('admin/admin','AdminController@admin');
-Route::get('admin/level/delete/{id}','LevelController@destroy');
+Route::get('admin/admin/delete/{id}','AdminController@destroy');
 Route::get('admin/level/show/{id}','LevelController@show');
 Route::get('admin/level','LevelController@index');
 Route::get('admin/cost/delete/{id}','CostController@destroy');
@@ -46,8 +46,11 @@ Route::get('admin/history','HistoryController@index');
 Route::post('admin/usage/add/{id}','UsageController@create');
 Route::post('admin/login','AuthController@adminLogin');
 Route::post('admin/admin/add','AdminController@create');
+Route::post('admin/admin/update','AdminController@update');
 Route::post('admin/cost/add','CostController@create');
+Route::post('admin/cost/update','CostController@update');
 Route::post('admin/customer/add','CustomerController@create');
+Route::post('admin/customer/update','CustomerController@update');
 
 // Customer route
 Route::get('/','CustomerController@index');

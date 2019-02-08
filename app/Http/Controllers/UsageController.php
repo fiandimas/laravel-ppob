@@ -96,11 +96,8 @@ class UsageController extends Controller {
       'month' => $month,
       'capt' => 'Penggunaan'
     );
+      
+    return view('admin.usage.detail', $data);
 
-    if($usage->all() == null){
-      return redirect('admin/usage');
-    }else{
-      return view('admin.usage.detail', $data);
-    }
   }
 }

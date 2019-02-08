@@ -41,6 +41,15 @@ class CostController extends Controller {
     return redirect()->back()->with('success','Success add cost');
   }
 
+  public function update(Request $req){
+    $cost = Cost::find($req->id);
+    $cost->power = $req->power;
+    $cost->cost = $req->cost;
+
+    $cost->save();
+    return redirect()->back()->with('success','Success update cost');
+  }
+
   public function destroy($id){
     $cost = Cost::find($id);
     if($cost == null){

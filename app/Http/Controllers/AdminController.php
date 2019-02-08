@@ -72,4 +72,14 @@ class AdminController extends Controller {
     }    
   }
 
+  public function update(Request $req){
+    $admin = Admin::find($req->id);
+    $admin->name = $req->name;
+    $admin->id_level = $req->level;
+
+    $admin->save();
+
+    return redirect()->back()->with('success','Success update admin');
+  }
+
 }

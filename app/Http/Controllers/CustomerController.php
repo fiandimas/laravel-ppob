@@ -69,6 +69,17 @@ class CustomerController extends Controller {
     
   }
 
+  public function update(Request $req){
+    $customer = Customer::find($req->id);
+    $customer->name = $req->name;
+    $customer->kwh_number = $req->kwh_number;
+    $customer->address = $req->address;
+    $customer->id_cost = $req->power;
+
+    $customer->save();
+    return redirect()->back()->with('success','Success update customer');
+  }
+
   public function destroy($id){
     $customer = Customer::find($id);
     if($customer == null){

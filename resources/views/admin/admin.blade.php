@@ -24,15 +24,15 @@
               </tr>
               @foreach ($admin as $data)
                 <tr>
-                  <th>{{ $no++ }}</th>
-                  <th>{{ $data->id }}</th>
-                  <th>{{ $data->name }}</th>
-                  <th>{{ $data->username }}</th>
-                  <th>{{ $data->lname }}</th>
-                  <th>
-                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get(1)">Edit</a>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->name }}</td>
+                  <td>{{ $data->username }}</td>
+                  <td>{{ $data->lname }}</td>
+                  <td>
+                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get('{{ $data->name }}',{{ $data->id }})">Edit</a>
                     <a href="{{ url('admin/admin/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
-                  </th>
+                  </td>
                 </tr>
               @endforeach
             </table>
@@ -78,9 +78,18 @@
         <h4 class="modal-title">Tambah level</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post" enctype="multipart/form-data">
-          Nama level 
-          <input type="text" class="form-control" name="nama_level">
+        <form action="{{ url('admin/admin/update') }}" method="post">
+          <input type="hidden" name="id" id="id_update">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          Name
+          <input type="text" class="form-control" name="name" id="name_update" required>
+          <br>
+          Level
+          <select name="level" class="form-control">
+            @foreach ($level as $data)
+              <option value="{{ $data->id }}">{{ $data->name }}</option>
+            @endforeach
+          </select>
           <br>
           <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
         </form>
@@ -91,4 +100,10 @@
     </div>
   </div>
 </div>
+<script>
+  function get(name,id){
+    $('#name_update').val(name);
+    $('#id_update').val(id);
+  }
+</script>
 @endsection

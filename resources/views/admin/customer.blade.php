@@ -26,17 +26,17 @@
               </tr>
               @foreach ($customer as $data)
                 <tr>
-                  <th>{{ $no++ }}</th>
-                  <th>{{ $data->id }}</th>
-                  <th>{{ $data->name }}</th>
-                  <th>{{ $data->username }}</th>
-                  <th>{{ $data->address }}</th>
-                  <th>{{ $data->kwh_number }}</th>
-                  <th>{{ $data->power }}</th>
-                  <th>
-                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get(1)">Edit</a>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->name }}</td>
+                  <td>{{ $data->username }}</td>
+                  <td>{{ $data->address }}</td>
+                  <td>{{ $data->kwh_number }}</td>
+                  <td>{{ $data->power }}</td>
+                  <td>
+                    <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }},'{{ $data->name}}','{{ $data->address }}',{{ $data->kwh_number }})">Edit</a>
                     <a href="{{ url('admin/customer/delete').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this level ?')">Delete</a>
-                  </th>
+                  </td>
                 </tr>
               @endforeach
             </table>
@@ -86,9 +86,24 @@
         <h4 class="modal-title">Tambah level</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post" enctype="multipart/form-data">
-          Nama level 
-          <input type="text" class="form-control" name="nama_level">
+        <form action="{{ url('admin/customer/update') }}" method="post">
+          <input type="hidden" name="id" id="id">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          Nama Pelanggan
+          <input type="text" class="form-control" name="name" id="name_customer" required>
+          <br>
+          Alamat
+          <input type="text" class="form-control" name="address" id="address" required>
+          <br>
+          Nomor KWH
+          <input type="number" class="form-control" name="kwh_number" id="kwh_number" required>
+          <br>
+          Daya
+          <select class="form-control" name="power">
+            @foreach ($power as $data)
+              <option value="{{ $data->id }}">{{ $data->power }}</option>
+            @endforeach
+          </select>     
           <br>
           <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
         </form>
@@ -99,4 +114,12 @@
     </div>
   </div>
 </div>
+<script>
+  function get(id,name,address,kwh){
+    $('#id').val(id);
+    $('#name_customer').val(name);
+    $('#address').val(address);
+    $('#kwh_number').val(kwh);
+  }  
+  </script>
 @endsection
