@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
-use Session;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Payment;
 use App\Bill;
-use Illuminate\Http\Request;
+use Session;
+use DB;
 
 class PaymentController extends Controller {
 

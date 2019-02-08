@@ -1,14 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Session;
-use DB;
-use App\Usage;
-use App\Customer;
-use App\Month;
-use App\Bill;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Customer;
+use App\Usage;
+use App\Month;
+use Session;
+use App\Bill;
+use DB;
 
 class UsageController extends Controller {
 

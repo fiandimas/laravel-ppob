@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Admin;
 use App\Level;
-use Session;
 use Hash;
 use DB;
 

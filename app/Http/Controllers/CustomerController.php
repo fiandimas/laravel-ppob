@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Session;
-use DB;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Customer;
 use App\Cost;
-use Illuminate\Http\Request;
+use Session;
 use Hash;
+use DB;
 
 class CustomerController extends Controller {
 
