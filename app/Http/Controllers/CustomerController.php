@@ -16,7 +16,7 @@ class CustomerController extends Controller {
       return redirect('login')->with('fail','You must login first!');
     }else{
       if(Session::get('level') == 'customer'){
-        return view('customer.dashboard');
+        return view('customer.dashboard',['capt' => 'Dashboard']);
       }else{
         return view('errors/403');
       }

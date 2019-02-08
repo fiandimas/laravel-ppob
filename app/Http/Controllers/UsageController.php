@@ -7,6 +7,7 @@ use DB;
 use App\Usage;
 use App\Customer;
 use App\Month;
+use App\Bill;
 use Illuminate\Http\Request;
 
 class UsageController extends Controller {
@@ -46,6 +47,14 @@ class UsageController extends Controller {
     $usage->finish_meter = $req->finish_meter;
 
     $usage->save();
+    
+    $bill = new Bill();
+    $bill->id_usage = $usage->id;
+    $usage->month = $req->month;
+    $usage->year = $req->year;
+    $usage->total = $req->start_meter + $req->finish_meter;
+
+    $bill->save();
 
     return redirect('admin/usage')->with('success','Success add usage');
   }

@@ -69,7 +69,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="/images/user.png" width="48" height="48" alt="User" />
+                    <img src="{{ asset('images/shizu.jpg') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Session::get('name') }}</div>
@@ -119,7 +119,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>DASHBOARD</h2>
+                <h2>{{ $capt }}</h2>
             </div>
             <!-- CPU Usage -->
             

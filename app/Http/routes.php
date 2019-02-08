@@ -59,3 +59,4 @@ Route::get('/logout', function(){
 });
 Route::get('bill','BillController@customer');
 Route::post('login','AuthController@customerLogin');
+Route::post('bill/confirm','BillController@confirm');
