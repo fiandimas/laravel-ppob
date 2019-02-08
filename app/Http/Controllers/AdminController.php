@@ -11,16 +11,12 @@ use App\Level;
 
 class AdminController extends Controller {
 
+  public function __construct(){
+    $this->middleware('admin');
+  }
+
 	public function index(){
-		if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        return view('admin.dashboard', ['capt' => 'Dashboard']);
-      }else{
-        return view('errors/403');
-      }
-    }
+		return view('admin.dashboard', ['capt' => 'Dashboard']);
   }
   
   public function admin(){

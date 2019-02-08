@@ -11,24 +11,18 @@ use Hash;
 
 class CustomerController extends Controller {
 
+  public function __construct(){
+    $this->middleware('admin', ['except' => 
+      'index'
+    ]);
+  }
+
 	public function index(){
-    if(!Session::get('login')){
-      return redirect('login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 'customer'){
-        return view('customer.dashboard',['capt' => 'Dashboard']);
-      }else{
-        return view('errors/403');
-      }
-    }
+    return view('customer.dashboard',['capt' => 'Dashboard']);
   }
   
   public function customer(){
-    if(!Session::get('login')){
-      return redirect('login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        $customer = DB::table('customer')
+    $customer = DB::table('customer')
                       ->join('cost','cost.id','=','customer.id_cost')
                       ->select('customer.id','customer.name','customer.name','customer.username','customer.kwh_number','customer.address','cost.power')
                       ->get();
@@ -40,10 +34,6 @@ class CustomerController extends Controller {
           'capt' => 'Pelanggan'
         );
         return view('admin.customer', $data);
-      }else{
-        return view('errors/403');
-      }
-    }
   }
 
   public function create(Request $req){

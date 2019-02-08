@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class HistoryController extends Controller {
 
+  public function __construct(){
+    $this->middleware('history');
+  }
+
   public function index(){
     $history = DB::table('payment')
                     ->join('bill','bill.id','=','payment.id_bill')

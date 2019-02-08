@@ -29,7 +29,6 @@ Route::get('admin/logout', function(){
 
 Route::get('admin/admin','AdminController@admin');
 Route::get('admin/admin/delete/{id}','AdminController@destroy');
-Route::get('admin/level/show/{id}','LevelController@show');
 Route::get('admin/level','LevelController@index');
 Route::get('admin/cost/delete/{id}','CostController@destroy');
 Route::get('admin/customer/delete/{id}','CustomerController@destroy');
@@ -54,7 +53,7 @@ Route::post('admin/customer/update','CustomerController@update');
 
 // Customer route
 Route::get('/','CustomerController@index');
-Route::get('/login',function(){
+Route::get('login',function(){
   return view('customer.login');
 });
 Route::get('/logout', function(){

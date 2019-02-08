@@ -12,24 +12,22 @@ use Illuminate\Http\Request;
 
 class UsageController extends Controller {
 
+  public function __construct(){
+    $this->middleware('admin');
+  }
+
 	public function index(){
-		if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        $customer = DB::table('customer')
-                        ->join('cost','cost.id','=','customer.id_cost')
-                        ->select('customer.id','customer.name','customer.kwh_number','cost.power')
-                        ->get();
-        $data = array(
-          'no' => 1,
-          'customer' => $customer,
-          'capt' => 'Daftar Penggunaan'
-        );
-        return view('admin.usage', $data);
-      }else{
-        return view('errors/403');
-      }
+		if(Session::get('level') == 1){
+      $customer = DB::table('customer')
+                      ->join('cost','cost.id','=','customer.id_cost')
+                      ->select('customer.id','customer.name','customer.kwh_number','cost.power')
+                      ->get();
+      $data = array(
+        'no' => 1,
+        'customer' => $customer,
+        'capt' => 'Daftar Penggunaan'
+      );
+      return view('admin.usage', $data);
     }
   }
 

@@ -9,21 +9,17 @@ use Illuminate\Http\Request;
 
 class CostController extends Controller {
 
+  public function __construct(){
+    $this->middleware('admin');
+  }
+
 	public function index(){
-    if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        $data = array(
-          'no' => 1,
-          'cost' => Cost::all(),
-          'capt' => 'Tarif'
-        );
-        return view('admin.cost',$data);
-      }else{
-        return view('errors/403');
-      }
-    }
+    $data = array(
+      'no' => 1,
+      'cost' => Cost::all(),
+      'capt' => 'Tarif'
+    );
+    return view('admin.cost',$data);
   }
 
   public function create(Request $req){

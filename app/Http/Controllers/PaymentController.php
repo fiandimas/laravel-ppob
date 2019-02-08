@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller {
 
+  public function __construct(){
+    $this->middleware('admin');
+  }
+
 	public function index(){
-    if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        $payment = DB::table('payment')
+    $payment = DB::table('payment')
                         ->whereIn('payment.status',['p','n'])
                         ->join('bill','bill.id','=','payment.id_bill')
                         ->join('usage','usage.id','=','bill.id_usage')
@@ -47,10 +47,6 @@ class PaymentController extends Controller {
           'status' => $status
         );
         return view('admin.payment', $data);
-      }else{
-        return view('errors/403');
-      }
-    }
   }
 
   public function accept($id_payment,$id_bill){
