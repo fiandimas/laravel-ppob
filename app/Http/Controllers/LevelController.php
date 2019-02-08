@@ -26,16 +26,6 @@ class LevelController extends Controller {
       }
     }
   }
-  
-  public function destroy($id){
-    $level = Level::find($id);
-    if($level == null){
-      return redirect('admin/level');
-    }else{
-      $level->delete();
-      return redirect('admin/level')->with('success','Succss delete level');
-    }    
-  }
 
   public function show($id){
     return Level::find($id);

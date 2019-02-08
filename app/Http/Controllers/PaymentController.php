@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use Session;
+use App\Payment;
+use App\Bill;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller {
@@ -18,7 +20,7 @@ class PaymentController extends Controller {
                         ->join('bill','bill.id','=','payment.id_bill')
                         ->join('usage','usage.id','=','bill.id_usage')
                         ->join('customer','customer.id','=','usage.id_customer')
-                        ->select('payment.id','customer.name','customer.kwh_number','payment.date','payment.id_month','payment.year','payment.admin_cost','payment.total','payment.status','payment.bukti')
+                        ->select('payment.id','customer.name','customer.kwh_number','payment.date','payment.id_month','payment.year','payment.admin_cost','payment.total','payment.status','payment.bukti','payment.id_bill')
                         ->get();
         $month = array(
             1 => 'Januari',
@@ -48,6 +50,32 @@ class PaymentController extends Controller {
         return view('errors/403');
       }
     }
+  }
+
+  public function accept($id_payment,$id_bill){
+    $payment = Payment::find($id_payment);
+    $payment->status = 'y';
+    $payment->id_admin = Session::get('id');
+    $payment->save();
+
+    $bill = Bill::find($id_bill);
+    $bill->status = 'y';
+    $bill->save();
+
+    return redirect('admin/payment')->with('success','Success accept confirmation');
+  }
+
+  public function reject($id_payment,$id_bill){
+    $payment = Payment::find($id_payment);
+    $payment->status = 'r';
+    $payment->id_admin = Session::get('id');
+    $payment->save();
+
+    $bill = Bill::find($id_bill);
+    $bill->status = 'r';
+    $bill->save();
+
+    return redirect('admin/payment')->with('success','Success reject confirmation');
   }
 
 }

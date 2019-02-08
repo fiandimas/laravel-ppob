@@ -13,10 +13,10 @@ use File;
 class BillController extends Controller {
 
 	public function index(){
-    if(!Session::put('login')){
+    if(!Session::get('login')){
       return redirect('login')->with('fail','You must login first!');
     }else{
-      if(Session::put('level') == 'customer'){
+      if(Session::get('level') == 'customer'){
         $month = array(
           1 => 'Januari',
           2 => 'Februari',
@@ -48,9 +48,10 @@ class BillController extends Controller {
                   ->where('id_customer',$id)
                   ->select('bill.month','bill.year','bill.total_meter','bill.status')
                   ->get();
+
     $status = array(
       'y' => 'Lunas',
-      'n' => 'Belum Lunas'
+      'n' => 'Belum Lunas',
     );
     $month = array(
       1 => 'Januari',
@@ -78,17 +79,20 @@ class BillController extends Controller {
 
   public function customer(){
     $bill =  DB::table('bill')
-              ->where('id_customer',Session::get('id'))
+              ->where('usage.id_customer',Session::get('id'))
               ->join('usage','usage.id','=','bill.id_usage')
               ->join('customer','customer.id','=','usage.id_customer')
               ->join('cost','cost.id','=','customer.id_cost')
-              ->join('payment','bill.id','=','payment.id_bill')
-              ->select('bill.id','bill.month','bill.year','cost.cost','bill.total_meter','bill.status','payment.bukti')
+              ->leftJoin('payment','bill.id','=','payment.id_bill')
+              ->select('bill.id','bill.month','bill.year','cost.cost','bill.total_meter','payment.status','payment.bukti')
+              ->orderBy('bill.id','DESC')
               ->get();
     $status = array(
+      '' => 'Belum Upload',
       'n' => 'Belum Bayar',
       'y' => 'Lunas',
-      'p' => 'Pending'
+      'p' => 'Pending',
+      'r' => 'Ditolak'
     );
     $month = array(
       1 => 'Januari',
@@ -125,17 +129,23 @@ class BillController extends Controller {
     // FInd Bill with id and update status to pending
     $bill = Bill::find($req->id);
     $bill->status = 'p';
-    $bill->save();
+    
 
     // Find payment
-    $payment = Payment::where('id_bill',$req->id)->first();
-    // Delete previous confirm if exists
-    if(File::exists(public_path('images/customer/bill/'.$payment->bukti))){
-      File::delete(public_path('images/customer/bill/'.$payment->bukti));
+    $payment = Payment::firstOrNew(['id_bill' => $req->id]);
+    if($payment->bukti != null){
+      File::delete(public_path('/images/customer/bill/'.$payment->bukti));
     }
-    // Save
+    $payment->id_bill = $bill->id;
+    $payment->date = Date('Y-m-d');
+    $payment->id_month = $bill->month;
+    $payment->year = $bill->year;
+    $payment->admin_cost = 10000;
+    $payment->total = $req->total;
     $payment->bukti = $photoName;
+    // Save
     $payment->save();
+    $bill->save();
     $save = $photo->move($path,$photoName);
     // Redirect
     return redirect()->back()->with('success','Success send confirm');

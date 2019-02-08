@@ -7,4 +7,5 @@ class Payment extends Model {
 	protected $table = 'payment';
   public $timestamps = false;
 
+  protected $fillable = ['id_bill'];
 }

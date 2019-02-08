@@ -35,7 +35,7 @@
                 <tr>
                   <td>{{ $data->id }}</td>
                   <td>{{ $month[$data->month].' '.$data->year }}</td>
-                  <td>Rp. {{ $data->cost * $data->total_meter }}</td>
+                  <td>Rp. {{ $data->cost * $data->total_meter + 10000 }}</td>
                   <td>
                     @if ($data->bukti)
                     <img src="{{ asset('images/customer/bill').'/'.$data->bukti }}" height="50px">
@@ -46,8 +46,8 @@
                   </td>
                   <td>{{ $status[$data->status]}}</td>
                   <td>
-                    @if ($data->status == 'n' || $data->status == 'p')
-                      <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }})">Upload</a>
+                    @if ($data->status == 'n' || $data->status == 'p' || $data->status == 'r' || $data->status == '')
+                      <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }},{{ $data->cost * $data->total_meter }})">Upload</a>
                     @else
                       {{ $status[$data->status]}}
                     @endif
@@ -72,6 +72,7 @@
         <form action="{{ url('bill/confirm') }}" method="post" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="id" id="id_bill">
+          <input type="hidden" name="total" id="total">
           <input type="file" class="form-control" name="photo">
           <br>
           <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
@@ -84,8 +85,9 @@
   </div>
 </div>
 <script>
-  function get(id_tagihan){
+  function get(id_tagihan,total){
 		$("#id_bill").val(id_tagihan);
+    $("#total").val(total);
 	}
 
 </script>

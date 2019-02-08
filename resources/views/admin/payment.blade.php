@@ -13,12 +13,17 @@
       <div class="body">
         <div class="row">
           <div class="col-md-12">
+            @if (session('success'))
+              <div class="alert alert-success">
+                {{ session('success') }}
+              </div>
+            @endif
             <table class="table table-striped table-bordered">
               <tr>
                 <th>No. KWH</th>
                 <th>Nama Pelanggan</th>
                 <th>Tgl. Pembayaran</th>
-                <th>Bulan Bayars</th>
+                <th>Bulan Bayar</th>
                 <th>Biaya Admin</th>
                 <th>Total</th>
                 <th>Status</th>
@@ -40,8 +45,8 @@
                   @endif
                 </th>
                 <td>
-                  <a href="{{ url('admin/payment/accept').'/'.$data->id }}" class="btn btn-success" onclick="return confirm('Are you sure to accept this item?')">Lunas</a>
-                  <a href="{{ url('admin/payment/reject').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to reject this item?')">Tolak</a>
+                  <a href="{{ url('admin/payment/accept').'/'.$data->id.'/'.$data->id_bill }}" class="btn btn-success" onclick="return confirm('Are you sure to accept this item?')">Lunas</a>
+                  <a href="{{ url('admin/payment/reject').'/'.$data->id.'/'.$data->id_bill }}" class="btn btn-danger" onclick="return confirm('Are you sure to reject this item?')">Tolak</a>
                 </th>
               </tr>
               @endforeach

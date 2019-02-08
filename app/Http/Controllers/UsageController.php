@@ -50,9 +50,9 @@ class UsageController extends Controller {
     
     $bill = new Bill();
     $bill->id_usage = $usage->id;
-    $usage->month = $req->month;
-    $usage->year = $req->year;
-    $usage->total = $req->start_meter + $req->finish_meter;
+    $bill->month = $usage->month;
+    $bill->year = $usage->year;
+    $bill->total_meter = $usage->start_meter + $usage->finish_meter;
 
     $bill->save();
 
