@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Hash;
-use Session;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Admin;
-use DB;
 use App\Level;
+use Session;
+use Hash;
+use DB;
 
 class AdminController extends Controller {
 
@@ -20,25 +20,17 @@ class AdminController extends Controller {
   }
   
   public function admin(){
-    if(!Session::get('login')){
-      return redirect('admin/login')->with('fail','You must login first!');
-    }else{
-      if(Session::get('level') == 1){
-        $admin = DB::table('admin')
-                    ->join('level','level.id','=','admin.id_level')
-                    ->select('admin.id','admin.name','admin.username','level.name as lname')
-                    ->get();
-        $data = array(
-          'no' => 1,
-          'admin' => $admin,
-          'level' => Level::all(),
-          'capt' => 'Admin'
-        );
-        return view('admin.admin',$data);
-      }else{
-        return view('errors/403');
-      }
-    }
+    $admin = DB::table('admin')
+                  ->join('level','level.id','=','admin.id_level')
+                  ->select('admin.id','admin.name','admin.username','level.name as lname')
+                  ->get();
+    $data = array(
+      'no' => 1,
+      'admin' => $admin,
+      'level' => Level::all(),
+      'capt' => 'Admin'
+    );
+    return view('admin.admin',$data);
   }
 
   public function create(Request $req){
@@ -72,7 +64,6 @@ class AdminController extends Controller {
     $admin = Admin::find($req->id);
     $admin->name = $req->name;
     $admin->id_level = $req->level;
-
     $admin->save();
 
     return redirect()->back()->with('success','Success update admin');

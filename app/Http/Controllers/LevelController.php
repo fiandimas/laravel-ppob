@@ -19,6 +19,7 @@ class LevelController extends Controller {
       'level' => Level::all(),
       'capt' => 'Level'
     );
+    
     return view('admin.level',$data);
   }
 }

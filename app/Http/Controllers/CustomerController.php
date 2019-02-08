@@ -13,7 +13,7 @@ class CustomerController extends Controller {
 
   public function __construct(){
     $this->middleware('admin', ['except' => 
-      'index'
+      ['index']
     ]);
   }
 
@@ -23,17 +23,18 @@ class CustomerController extends Controller {
   
   public function customer(){
     $customer = DB::table('customer')
-                      ->join('cost','cost.id','=','customer.id_cost')
-                      ->select('customer.id','customer.name','customer.name','customer.username','customer.kwh_number','customer.address','cost.power')
-                      ->get();
-        $power = Cost::all();
-        $data= array(
-          'no' => 1,
-          'customer' => $customer,
-          'power' => $power,
-          'capt' => 'Pelanggan'
-        );
-        return view('admin.customer', $data);
+                    ->join('cost','cost.id','=','customer.id_cost')
+                    ->select('customer.id','customer.name','customer.name','customer.username','customer.kwh_number','customer.address','cost.power')
+                    ->get();
+    $power = Cost::all();
+    $data= array(
+      'no' => 1,
+      'customer' => $customer,
+      'power' => $power,
+      'capt' => 'Pelanggan'
+    );
+
+    return view('admin.customer', $data);
   }
 
   public function create(Request $req){
@@ -52,7 +53,6 @@ class CustomerController extends Controller {
     $customer->address = $req->address;
     $customer->kwh_number = $req->kwh_number;
     $customer->id_cost = $req->power;
-
     $customer->save();
 
     return redirect()->back()->with('success','Success add customer');
@@ -65,8 +65,8 @@ class CustomerController extends Controller {
     $customer->kwh_number = $req->kwh_number;
     $customer->address = $req->address;
     $customer->id_cost = $req->power;
-
     $customer->save();
+
     return redirect()->back()->with('success','Success update customer');
   }
 
@@ -76,6 +76,7 @@ class CustomerController extends Controller {
       return redirect('admin/customer');
     }else{
       $customer->delete();
+      
       return redirect('admin/customer')->with('success','Success delete customer');
     }
   }

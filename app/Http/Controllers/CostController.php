@@ -19,6 +19,7 @@ class CostController extends Controller {
       'cost' => Cost::all(),
       'capt' => 'Tarif'
     );
+
     return view('admin.cost',$data);
   }
 
@@ -27,11 +28,10 @@ class CostController extends Controller {
       'power' => 'required|numeric',
       'cost' => 'required|numeric'
     ]);
-
+    
     $cost = new Cost();
     $cost->power = $req->power;
     $cost->cost = $req->cost;
-
     $cost->save();
 
     return redirect()->back()->with('success','Success add cost');
@@ -41,8 +41,8 @@ class CostController extends Controller {
     $cost = Cost::find($req->id);
     $cost->power = $req->power;
     $cost->cost = $req->cost;
-
     $cost->save();
+
     return redirect()->back()->with('success','Success update cost');
   }
 
@@ -52,6 +52,7 @@ class CostController extends Controller {
       return redirect('admin/cost');
     }else{
       $cost->delete();
+
       return redirect('admin/cost')->with('success','Success delete cost');
     }
   }

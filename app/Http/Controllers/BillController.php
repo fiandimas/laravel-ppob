@@ -1,14 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Session;
-use DB;
-use App\Bill;
-use App\Usage;
-use App\Payment;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Payment;
+use App\Usage;
+use App\Bill;
+use Session;
 use File;
+use DB;
 
 class BillController extends Controller {
 
@@ -20,11 +20,10 @@ class BillController extends Controller {
 
   public function detail($id){
     $bill = DB::table('bill')
-                  ->join('usage','usage.id','=','bill.id_usage')
-                  ->where('id_customer',$id)
-                  ->select('bill.month','bill.year','bill.total_meter','bill.status')
-                  ->get();
-
+                ->join('usage','usage.id','=','bill.id_usage')
+                ->where('id_customer',$id)
+                ->select('bill.month','bill.year','bill.total_meter','bill.status')
+                ->get();
     $status = array(
       'y' => 'Lunas',
       'n' => 'Belum Lunas',
@@ -83,13 +82,14 @@ class BillController extends Controller {
       10 => 'Oktober',
       11 => 'November',
       12 => 'Desember'
-  );
+    );
     $data = array(
       'bill' => $bill,
       'status' => $status,
       'capt' => 'Tagihan',
       'month' => $month
     );
+    
     return view('customer.bill', $data);
   }
 
@@ -98,15 +98,14 @@ class BillController extends Controller {
     $this->validate($req,[
       'photo' => 'required|image|mimes:jpeg,png,jpg'
     ]);
-    // get photo and rename
+    // Rename photo and define path 
     $photo = $req->file('photo');
     $photoName = time().'.'.$photo->getClientOriginalName();
     $path = public_path('/images/customer/bill');
-    // FInd Bill with id and update status to pending
+    // Find Bill with id and update status to pending
     $bill = Bill::find($req->id);
     $bill->status = 'p';
     
-
     // Find payment
     $payment = Payment::firstOrNew(['id_bill' => $req->id]);
     $payment->id_bill = $bill->id;
@@ -118,11 +117,10 @@ class BillController extends Controller {
     $payment->bukti = $photoName;
     $payment->status = 'p';
       // Save
-    $payment->save();
-    
+    $payment->save();    
     $bill->save();
     $save = $photo->move($path,$photoName);
-    // Redirect
+
     return redirect()->back()->with('success','Success send confirm');
   }
 

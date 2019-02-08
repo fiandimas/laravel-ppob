@@ -27,6 +27,7 @@ class UsageController extends Controller {
         'customer' => $customer,
         'capt' => 'Daftar Penggunaan'
       );
+
       return view('admin.usage', $data);
     }
   }
@@ -36,14 +37,12 @@ class UsageController extends Controller {
       'start_meter' => 'required|numeric',
       'finish_meter' => 'required|numeric'
     ]);
-    
     $usage = new Usage();
     $usage->id_customer = $id;
     $usage->month = $req->month;
     $usage->year = $req->year;
     $usage->start_meter = $req->start_meter;
     $usage->finish_meter = $req->finish_meter;
-
     $usage->save();
     
     $bill = new Bill();
@@ -51,7 +50,6 @@ class UsageController extends Controller {
     $bill->month = $usage->month;
     $bill->year = $usage->year;
     $bill->total_meter = $usage->start_meter + $usage->finish_meter;
-
     $bill->save();
 
     return redirect('admin/usage')->with('success','Success add usage');
@@ -64,7 +62,6 @@ class UsageController extends Controller {
       'month' => Month::all(),
       'capt' => 'Penggunaan'
     );
-
     if($customer == null){
       return redirect('admin/usage');
     }else{

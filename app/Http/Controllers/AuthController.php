@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Admin;
+use App\Http\Requests;
 use App\Customer;
-use Hash;
+use App\Admin;
 use Session;
+use Hash;
 
 class AuthController extends Controller {
 
@@ -26,6 +26,7 @@ class AuthController extends Controller {
           'name' => $user->name
         );
         Session::put($session);
+
         return redirect('/admin');
       }else{
         return redirect()->back()->with('fail','Wrong password!')->withInput();
@@ -51,6 +52,7 @@ class AuthController extends Controller {
           'name' => $customer->name
         );
         Session::put($session);
+        
         return redirect('/');
       }else{
         return redirect()->back()->with('fail','Wrong password')->withInput();
