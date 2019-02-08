@@ -22,7 +22,8 @@ class UsageController extends Controller {
                         ->get();
         $data = array(
           'no' => 1,
-          'customer' => $customer
+          'customer' => $customer,
+          'capt' => 'Daftar Penggunaan'
         );
         return view('admin.usage', $data);
       }else{
@@ -53,7 +54,8 @@ class UsageController extends Controller {
     $customer = Customer::find($id);
     $data = array(
       'customer' => $customer,
-      'month' => Month::all()
+      'month' => Month::all(),
+      'capt' => 'Penggunaan'
     );
 
     if($customer == null){
@@ -82,7 +84,8 @@ class UsageController extends Controller {
     $data = array(
       'no' => 1,
       'usage' => $usage,
-      'month' => $month
+      'month' => $month,
+      'capt' => 'Penggunaan'
     );
 
     if($usage->all() == null){

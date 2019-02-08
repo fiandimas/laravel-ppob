@@ -16,7 +16,7 @@ class AdminController extends Controller {
       return redirect('admin/login')->with('fail','You must login first!');
     }else{
       if(Session::get('level') == 1){
-        return view('admin.dashboard');
+        return view('admin.dashboard', ['capt' => 'Dashboard']);
       }else{
         return view('errors/403');
       }
@@ -35,7 +35,8 @@ class AdminController extends Controller {
         $data = array(
           'no' => 1,
           'admin' => $admin,
-          'level' => Level::all()
+          'level' => Level::all(),
+          'capt' => 'Admin'
         );
         return view('admin.admin',$data);
       }else{

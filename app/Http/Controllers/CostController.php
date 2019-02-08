@@ -16,7 +16,8 @@ class CostController extends Controller {
       if(Session::get('level') == 1){
         $data = array(
           'no' => 1,
-          'cost' => Cost::all()
+          'cost' => Cost::all(),
+          'capt' => 'Tarif'
         );
         return view('admin.cost',$data);
       }else{

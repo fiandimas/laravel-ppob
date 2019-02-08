@@ -66,7 +66,8 @@ class BillController extends Controller {
     $data = array(
       'bill' => $bill,
       'status' => $status,
-      'month' => $month
+      'month' => $month,
+      'capt' => 'Tagihan'
     );
     
     return view('admin.usage.bill', $data);

@@ -36,7 +36,8 @@ class CustomerController extends Controller {
         $data= array(
           'no' => 1,
           'customer' => $customer,
-          'power' => $power
+          'power' => $power,
+          'capt' => 'Pelanggan'
         );
         return view('admin.customer', $data);
       }else{

@@ -6,7 +6,7 @@
       <div class="header">
         <div class="row clearfix">
           <div class="col-xs-12 col-sm-6">
-            <h2>Level</h2>
+            <h2>Daftar Tagihan</h2>
           </div>
         </div>
       </div>
@@ -29,6 +29,7 @@
               </tr>
               @endforeach
             </table>
+            <a href="{{ url('admin/usage') }}" class="btn btn-warning">Kembali</a>
           </div>
         </div>
       </div>

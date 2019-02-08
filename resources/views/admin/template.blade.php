@@ -155,7 +155,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>DASHBOARD</h2>
+                <h2>{{ $capt }}</h2>
             </div>
             <!-- CPU Usage -->
             

@@ -17,7 +17,8 @@ class LevelController extends Controller {
       if(Session::get('level') == 1){
         $data = array(
           'no' => 1,
-          'level' => Level::all()
+          'level' => Level::all(),
+          'capt' => 'Level'
         );
         return view('admin.level',$data);
       }else{
