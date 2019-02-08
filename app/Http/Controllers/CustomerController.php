@@ -13,7 +13,7 @@ class CustomerController extends Controller {
 
   public function __construct(){
     $this->middleware('admin', ['except' => 
-      ['index']
+      ['index','register']
     ]);
   }
 
@@ -65,6 +65,27 @@ class CustomerController extends Controller {
 
     return redirect()->back()->with('success','Success add customer');
     
+  }
+
+  public function register(Request $req){
+    $this->validate($req,[
+      'name' => 'required|min:4',
+      'username' => 'required|min:4|max:8|unique:customer,username',
+      'password' => 'required|min:4|max:8',
+      'address' => 'required',
+      'kwh_number' => 'required'
+    ]);
+
+    $customer = new Customer();
+    $customer->name = $req->name;
+    $customer->username = $req->username;
+    $customer->password = Hash::make($req->password);
+    $customer->address = $req->address;
+    $customer->kwh_number = $req->kwh_number;
+    $customer->id_cost = $req->power;
+    $customer->save();
+
+    return redirect('login')->with('success','Success register');
   }
 
   public function update(Request $req){

@@ -19,7 +19,7 @@ if(pageURL.includes('level')){
   document.getElementById('active-usage').classList.remove('active');
   document.getElementById('active-payment').classList.remove('active');
   document.getElementById('active-history').classList.remove('active');
-}else if(lastURLSegment == 'admin'){
+}else if(pageURL == 'http://localhost:8000/admin/admin'){
   document.getElementById('active-dashboard').classList.remove('active');
   document.getElementById('active-level').classList.remove('active');
   document.getElementById('active-admin').classList.add('active');

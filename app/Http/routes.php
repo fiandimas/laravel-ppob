@@ -1,5 +1,5 @@
 <?php
-use App\Payment;
+use App\Cost;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,8 +12,6 @@ use App\Payment;
 */
 
 // Admin Route
-
-
 Route::get('admin','AdminController@index');
 Route::get('admin/login', function(){
  if(Session::get('login')){
@@ -56,12 +54,17 @@ Route::get('/','CustomerController@index');
 Route::get('login',function(){
   return view('customer.login');
 });
+Route::get('register',function(){
+  $power = Cost::all();
+  return view('customer.register', ['power' => $power]);
+});
 Route::get('/logout', function(){
   Session::flush();
   return redirect('login');
 });
 Route::get('bill','BillController@customer');
 Route::post('login','AuthController@customerLogin');
+Route::post('register','CustomerController@register');
 Route::post('bill/confirm','BillController@confirm');
 
 // Teller route

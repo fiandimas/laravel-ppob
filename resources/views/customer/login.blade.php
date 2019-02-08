@@ -40,6 +40,11 @@
                         {{ session('fail') }}
                       </div>
                     @endif
+                    @if (session('success'))
+                      <div class="alert alert-success">
+                        {{ session('success') }}
+                      </div>
+                    @endif
                     <div class="input-group">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token">
                         <span class="input-group-addon">
@@ -62,6 +67,14 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="{{ url('register') }}">Register Now!</a>
+                        </div>
+                        <div class="col-xs-6 align-right">
+                            <a href="#">#</a>
                         </div>
                     </div>
                 </form>
