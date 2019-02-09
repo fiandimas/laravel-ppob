@@ -7,26 +7,26 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="/plugins/node-waves/waves.css" rel="stylesheet" />
+    <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="/plugins/animate-css/animate.css" rel="stylesheet" />
+    <link href="{{ asset('plugins/animate-css/animate.css') }}" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="/css/themes/all-themes.css" rel="stylesheet" />
+    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
 </head>
 
 <body class="theme-red">
@@ -69,7 +69,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="/images/shizu.jpg" width="48" height="48" alt="User" />
+                    <img src="{{ asset('images/shizu.jpg') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Session::get('name') }}</div>
@@ -164,27 +164,27 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="/plugins/node-waves/waves.js"></script>
+    <script src="{{ asset('plugins/node-waves/waves.js') }}"></script>
 
     <!-- Jquery CountTo Plugin Js -->
-    <script src="/plugins/jquery-countto/jquery.countTo.js"></script>
+    <script src="{{ asset('plugins/jquery-countto/jquery.countTo.js') }}"></script>
 
     <!-- Custom Js -->
-    <script src="/js/admin.js"></script>
-    <script src="/js/pages/index.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/pages/index.js') }}"></script>
 
     <!-- Demo Js -->
-    <script src="/js/demo.js"></script>
-    <script src="/js/select.js"></script>
+    <script src="{{ asset('js/demo.js') }}"></script>
+    <script src="{{ asset('js/select.js') }}"></script>
 </body>
 
 </html>

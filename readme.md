@@ -1,4 +1,4 @@
-#UKK Restoran (Laravel)
+#UKK PPOB (Laravel)
 
 Server Requirement (Laravel 5.0)
 PHP >= 5.4, PHP < 7
