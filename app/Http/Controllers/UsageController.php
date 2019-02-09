@@ -37,22 +37,26 @@ class UsageController extends Controller {
       'start_meter' => 'required|numeric',
       'finish_meter' => 'required|numeric'
     ]);
-    $usage = new Usage();
-    $usage->id_customer = $id;
-    $usage->month = $req->month;
-    $usage->year = $req->year;
-    $usage->start_meter = $req->start_meter;
-    $usage->finish_meter = $req->finish_meter;
-    $usage->save();
-    
-    $bill = new Bill();
-    $bill->id_usage = $usage->id;
-    $bill->month = $usage->month;
-    $bill->year = $usage->year;
-    $bill->total_meter = $usage->start_meter + $usage->finish_meter;
-    $bill->save();
+    $usage = Usage::firstOrNew(['month' => $req->month, 'year' => $req->year, 'id_customer' => $id]);
+    if($usage->id == null){
+      $usage->id_customer = $id;
+      $usage->month = $req->month;
+      $usage->year = $req->year;
+      $usage->start_meter = $req->start_meter;
+      $usage->finish_meter = $req->finish_meter;
+      $usage->save();
+      
+      $bill = new Bill();
+      $bill->id_usage = $usage->id;
+      $bill->month = $usage->month;
+      $bill->year = $usage->year;
+      $bill->total_meter = $usage->start_meter + $usage->finish_meter;
+      $bill->save();
 
-    return redirect('admin/usage')->with('success','Success add usage');
+      return redirect('admin/usage')->with('success','Success add usage');
+    }else{
+      return redirect('admin/usage/add/'.$id)->with('fail','Penggunaan bulan ini sudah ada');
+    }
   }
 
   public function loadCreate($id){

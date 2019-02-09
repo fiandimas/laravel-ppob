@@ -12,6 +12,11 @@
       </div>
       <div class="body">
         <div class="row">
+          @if (session('fail'))
+            <div class="alert alert-danger">
+              {{ session('fail') }}
+            </div>
+          @endif
           <div class="col-md-10">
             <form action="{{ url('admin/usage/add').'/'.$customer->id }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
