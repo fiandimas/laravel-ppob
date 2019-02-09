@@ -27,6 +27,6 @@ Route
 1. localhost:8000/ -> Customer
 
 Account
-1. Manager : user = aome, password = aome
-2. Teller : user = scarlet, password = scarlet
-3. Customer : user = alfian, password = alfian
+1. Manager : username = aome, password = aome
+2. Teller : username = scarlet, password = scarlet
+3. Customer : username = alfian, password = alfian

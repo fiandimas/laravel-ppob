@@ -50,7 +50,7 @@ class UsageController extends Controller {
       $bill->id_usage = $usage->id;
       $bill->month = $usage->month;
       $bill->year = $usage->year;
-      $bill->total_meter = $usage->start_meter + $usage->finish_meter;
+      $bill->total_meter = $usage->finish_meter - $usage->start_meter;
       $bill->save();
 
       return redirect('admin/usage')->with('success','Success add usage');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2019 at 12:02 AM
+-- Generation Time: Feb 09, 2019 at 10:27 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.35
 
@@ -63,8 +63,9 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `id_usage`, `month`, `year`, `total_meter`, `status`) VALUES
-(1, 1, 1, 2019, 85, 'y'),
-(2, 2, 7, 2021, 69, 'n');
+(1, 1, 1, 2019, 87, 'y'),
+(2, 2, 1, 2019, 86, 'n'),
+(3, 3, 2, 2019, 88, 'p');
 
 -- --------------------------------------------------------
 
@@ -108,10 +109,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `username`, `password`, `name`, `kwh_number`, `address`, `id_cost`) VALUES
-(2, 'dimas', '$2y$10$bEmCZDitlq9I1gwyFsgDC.LYxpAGR16D9mh00w/4ffAZMvJaGgt7K', 'Alfian', '20020708', 'Kepanjen', 2),
-(4, 'scarlet', '$2y$10$BtIo3cY9cIVUUtZHd2ImxOg1iTwyvy9xEfGP2d3lDcQzrUYpfW5zu', 'Scarlet', '20020908', 'Malang', 4),
-(5, 'sugara', '$2y$10$GAhZVoSsxTUTvlGpkNynI.SzGSDwNMOzlg.xPlyt9DhMPzy1Bq9VG', 'Sugara', '20020809', 'Kepanjen', 1),
-(6, 'alfian', '$2y$10$DYaB1EiQFHnc05.dh2Kx3uW3UCejWEUBG.bMwt5yZ0pnewC9RTbh6', 'Alfian', '20020908', 'Kepanjen', 2);
+(1, 'alfian', '$2y$10$ovkVsa.NC4IIwNYvPfmagO99lDQzjrlQYeXeScP2dWZR4JQHgVWhm', 'Alfian', '20020708', 'Kepanjen', 1),
+(2, 'scarlet', '$2y$10$QevsXLJFKS4Kl6CmrsVRxOTjKWSQ0uaiKqyohcTFwWtcdVUUj1Ga.', 'Scarlet', '20090708', 'Kepanjen', 2);
 
 -- --------------------------------------------------------
 
@@ -185,7 +184,8 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `id_bill`, `date`, `id_month`, `year`, `admin_cost`, `total`, `status`, `bukti`, `id_admin`) VALUES
-(1, 1, '2019-02-08', 1, 2019, 10000, 153000, 'y', '1549656625.akame.jpg', 1);
+(1, 3, '2019-02-09', 2, 2019, 10000, 89200, 'p', '1549704386.kariu.jpg', NULL),
+(2, 1, '2019-02-09', 1, 2019, 10000, 88300, 'y', '1549704397.scathach.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -207,8 +207,9 @@ CREATE TABLE `usage` (
 --
 
 INSERT INTO `usage` (`id`, `id_customer`, `month`, `year`, `start_meter`, `finish_meter`) VALUES
-(1, 2, 1, 2019, 5, 80),
-(2, 5, 7, 2021, 2, 67);
+(1, 1, 1, 2019, 2, 89),
+(2, 2, 1, 2019, 3, 89),
+(3, 1, 2, 2019, 1, 89);
 
 --
 -- Indexes for dumped tables
@@ -289,7 +290,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `cost`
 --
@@ -299,7 +300,7 @@ ALTER TABLE `cost`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `level`
 --
@@ -314,12 +315,12 @@ ALTER TABLE `month`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `usage`
 --
 ALTER TABLE `usage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -334,7 +335,7 @@ ALTER TABLE `admin`
 -- Constraints for table `bill`
 --
 ALTER TABLE `bill`
-  ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`id_usage`) REFERENCES `usage` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`id_usage`) REFERENCES `usage` (`id`);
 
 --
 -- Constraints for table `customer`

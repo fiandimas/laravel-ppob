@@ -47,7 +47,7 @@
                   <td>{{ $status[$data->status]}}</td>
                   <td>
                     @if ($data->status == 'n' || $data->status == 'p' || $data->status == 'r' || $data->status == '')
-                      <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }},{{ $data->cost * $data->total_meter }})">Upload</a>
+                      <a href="#edit" class="btn btn-warning" data-toggle="modal" onclick="get({{ $data->id }},{{ $data->cost * $data->total_meter + 10000 }})">Upload</a>
                     @else
                       {{ $status[$data->status]}}
                     @endif

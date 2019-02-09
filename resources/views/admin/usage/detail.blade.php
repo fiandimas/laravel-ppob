@@ -38,7 +38,7 @@
                 <td>{{ $data->year }}</td>
                 <td>{{ $data->start_meter }}</td>
                 <td>{{ $data->finish_meter }}</td>
-                <td>{{ $data->start_meter + $data->finish_meter }}</td>
+                <td>{{ $data->finish_meter - $data->start_meter }}</td>
                 <td>
                   <a href="{{ url('admin/usage/delete/').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this item ?')">Hapus</a>
                 </td>
