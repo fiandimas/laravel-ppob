@@ -13,6 +13,16 @@
       <div class="body">
         <div class="row">
           <div class="col-md-12">
+            @if (session('fail'))
+              <div class="alert alert-danger">
+                {{ session('fail') }}
+              </div>
+            @endif
+            @if (session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+          @endif
             <table class="table table-striped table-bordered">
               <tr>
                 <th>Bulan</th>
@@ -30,7 +40,7 @@
                 <td>{{ $data->finish_meter }}</td>
                 <td>{{ $data->start_meter + $data->finish_meter }}</td>
                 <td>
-                  <a href="{{ url('admin/usage/delete/').'/'.$data->id }}" class="btn btn-danger">Hapus</a>
+                  <a href="{{ url('admin/usage/delete/').'/'.$data->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this item ?')">Hapus</a>
                 </td>
               </tr>
               @endforeach

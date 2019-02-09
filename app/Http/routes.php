@@ -35,6 +35,7 @@ Route::get('admin/cost','CostController@index');
 Route::get('admin/usage','UsageController@index');
 Route::get('admin/usage/add/{id}','UsageController@loadCreate');
 Route::get('admin/usage/detail/{id}','UsageController@detail');
+Route::get('admin/usage/delete/{id}','UsageController@destroy');
 Route::get('admin/usage/bill/{id}','BillController@detail');
 Route::get('admin/payment','PaymentController@index');
 Route::get('admin/payment/accept/{id_payment}/{id_bill}','PaymentController@accept');

@@ -14,7 +14,7 @@ class BillController extends Controller {
 
   public function __construct(){
     $this->middleware('admin',['except' =>
-      ['customer']
+      ['customer','confirm']
     ]);
   }
 

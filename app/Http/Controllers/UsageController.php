@@ -6,8 +6,8 @@ use App\Http\Requests;
 use App\Customer;
 use App\Usage;
 use App\Month;
-use Session;
 use App\Bill;
+use Session;
 use DB;
 
 class UsageController extends Controller {
@@ -93,6 +93,26 @@ class UsageController extends Controller {
     );
       
     return view('admin.usage.detail', $data);
+  }
 
+  public function destroy($id){
+    $payment =  DB::table('usage')
+                ->where('usage.id',$id)
+                ->join('bill','bill.id_usage','=','usage.id')
+                ->leftJoin('payment','payment.id_bill','=','bill.id');
+    
+    if($payment->select('payment.id')->first()->id == null){
+      $delete =  $payment->select('usage.id as uid','bill.id as bid','usage.id_customer')->first();      
+      $bill = Bill::find($delete->bid);
+      $bill->delete();
+
+      $usage = Usage::find($delete->uid);
+      $usage->delete();
+
+      return redirect('admin/usage/detail/'.$delete->id_customer)->with('success','Success delete usage');
+    }else{
+      $delete =  $payment->select('usage.id_customer')->first();      
+      return redirect('admin/usage/detail/'.$delete->id_customer)->with('fail','Cant delete usage');
+    }
   }
 }
