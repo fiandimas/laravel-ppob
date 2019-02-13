@@ -21,9 +21,9 @@
               </tr>
               @foreach ($level as $data)
                 <tr>
-                  <th>{{ $no++ }}</th>
-                  <th>{{ $data->id }}</th>
-                  <th>{{ $data->name }}</th>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->id }}</td>
+                  <td>{{ $data->name }}</td>
                 </tr>
               @endforeach
             </table>

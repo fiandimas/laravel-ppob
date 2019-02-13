@@ -32,13 +32,13 @@
               </tr>
               @foreach ($payment as $data)
               <tr>
-                <td>{{ $data->name }}</th>
-                <td>{{ $data->kwh_number }}</th>
-                <td>{{ $data->date }}</th>
-                <td>{{ $month[$data->id_month] }} - {{ $data->year }}</th>
-                <td>{{ $data->admin_cost }}</th>
-                <td>{{ $data->total }}</th>
-                <td>{{ $status[$data->status] }}</th>
+                <td>{{ $data->kwh_number }}</td>
+                <td>{{ $data->name }}</td>
+                <td>{{ $data->date }}</td>
+                <td>{{ $month[$data->id_month] }} - {{ $data->year }}</td>
+                <td>{{ $data->admin_cost }}</td>
+                <td>{{ $data->total }}</td>
+                <td>{{ $status[$data->status] }}</td>
                 <td>
                   @if ($data->bukti)
                     <img src="{{ asset('images/customer/bill').'/'.$data->bukti }}" height="50px">
