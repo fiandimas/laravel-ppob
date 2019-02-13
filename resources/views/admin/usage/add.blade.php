@@ -19,6 +19,7 @@
           @endif
           <div class="col-md-10">
             <form action="{{ url('admin/usage/add').'/'.$customer->id }}" method="post">
+            <input type="hidden" id="id_customer" value="{{ $customer->id }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="table table-hover table-striped">
               <tr>
@@ -26,23 +27,19 @@
                 <td><input type="text" name="name" class="form-control" value="{{ $customer->name }}" readonly></td>
               </tr>
               <tr>
+                  <td>Tahun</td>
+                  <td>
+                    <select name="year" class="form-control" id="year">
+                      @for ($i=2019;$i<=2022;$i++)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                      @endfor
+                    </select>
+                  </td>
+                </tr>
+              <tr>
                 <td>Bulan</td>
                 <td>
-                  <select name="month" class="form-control">
-                    @foreach ($month as $data)
-                      <option value="{{ $data->id }}">{{ $data->name }}</option>
-                    @endforeach
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Tahun</td>
-                <td>
-                  <select name="year" class="form-control">
-                    @for ($i=2019;$i<=2022;$i++)
-                      <option value="{{ $i }}">{{ $i }}</option>
-                    @endfor
-                  </select>
+                  <select name="month" class="form-control" id="month"></select>
                 </td>
               </tr>
               <tr>

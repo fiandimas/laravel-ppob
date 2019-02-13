@@ -27,6 +27,7 @@ class BillController extends Controller {
     $status = array(
       'y' => 'Lunas',
       'n' => 'Belum Lunas',
+      'p' => 'Pending'
     );
     $month = array(
       1 => 'Januari',

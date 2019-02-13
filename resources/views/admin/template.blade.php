@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -185,6 +186,38 @@
     <!-- Demo Js -->
     <script src="{{ asset('js/demo.js') }}"></script>
     <script src="{{ asset('js/select.js') }}"></script>
+    @if (isset($add_usage))
+      <script>
+        // Setup X-CSRF-TOKEN
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        })
+        const id = $('#id_customer').val();
+        let year = $('#year').find(':selected').val();
+        $.ajax({
+          type: 'POST',
+          url: '/month/' + id + '/' + year,
+          dataType: 'html',
+          success: function(data){
+            $('#month').html(data).show();
+          }
+        })
+
+        $('#year').change(function(){
+          let year = $('#year').find(':selected').val();
+          $.ajax({
+            type: 'POST',
+            url: '/month/'+ id +'/'+year,
+            dataType: 'html',
+            success:function(data){
+              $('#month').html(data).show();
+            }
+          })
+        })
+      </script>
+    @endif
 </body>
 
 </html>

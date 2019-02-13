@@ -33,7 +33,7 @@
                   <td>{{ $data->kwh_number }}</td>
                   <td>{{ $data->power }}</td>
                   <td>
-                    <a href="{{ url('admin/usage/add').'/'.$data->id }}" class="btn btn-success" data-toggle="modal" onclick="get(1)">Tambah Penggunaan</a>
+                    <a href="{{ url('admin/usage/add').'/'.$data->id }}" class="btn btn-success">Tambah Penggunaan</a>
                     <a href="{{ url('admin/usage/detail').'/'.$data->id }}" class="btn btn-primary">Detail Penggunaan</a>
                     <a href="{{ url('admin/usage/bill').'/'.$data->id }}" class="btn btn-info">Detail Tagihan</a>
                   </td>

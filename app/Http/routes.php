@@ -1,5 +1,7 @@
 <?php
 use App\Cost;
+use App\Month;
+use App\Usage;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -79,3 +81,14 @@ Route::get('teller/logout', function(){
 });
 Route::get('teller/history','HistoryController@index');
 Route::post('teller/login','AuthController@adminLogin');
+Route::post('/month/{id}/{year}', function($id,$year){
+  $usage = Usage::where('year',$year)->where('id_customer',$id)->select('month')->get();
+  $result = [];
+  foreach($usage as $data){
+    array_push($result,$data->month);
+  }
+  $data = Month::whereNotIn('id',$result)->get();  
+  foreach($data as $datas){
+    echo "<option value='$datas->id'>$datas->name</option>";
+  }
+});

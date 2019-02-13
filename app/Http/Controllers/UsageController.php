@@ -68,8 +68,8 @@ class UsageController extends Controller {
     $customer = Customer::find($id);
     $data = array(
       'customer' => $customer,
-      'month' => Month::all(),
-      'capt' => 'Penggunaan'
+      'capt' => 'Penggunaan',
+      'add_usage' => true
     );
     if($customer == null){
       return redirect('admin/usage');
